@@ -21,6 +21,7 @@ const App = () => {
   const [searchBar, setSearchBar] = useState(dummyData)
 
   const likePost = (postId) => {
+    console.log(postId)
     /*
       This function serves the purpose of increasing the number of likes by one, of the post with a given id.
 
@@ -32,12 +33,16 @@ const App = () => {
         - if the `id` of the post matches `postId`, return a new post object with the desired values (use the spread operator).
         - otherwise just return the post object unchanged.
      */
+    const newPosts = posts.map((post) =>
+      post.id === postId ? { ...post, likes: post.likes + 1 } : post
+    )
+    setPosts(newPosts)
   }
 
   return (
     <div className="App">
       InstaNelly
-      {<SearchBar />}
+      {<SearchBar setSearchBar={setSearchBar} />}
       {<Posts likePost={likePost} posts={posts} />}
       {/* Add SearchBar and Posts here to render them */}
       {/* Check the implementation of each component, to see what props they require, if any! */}
